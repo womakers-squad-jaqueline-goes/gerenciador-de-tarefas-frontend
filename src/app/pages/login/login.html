@@ -1,0 +1,26 @@
+<section class="login-card">
+    <h1>Entrar</h1>
+
+    <form [formGroup]="formulario" (ngSubmit)="entrar()">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" required formControlName="email" />
+        @if (formulario.controls.email.touched &&
+        formulario.controls.email.hasError('required')) {
+        <small class="erro">Informe seu e-mail.</small>
+        }
+        @if (formulario.controls.email.touched &&
+        formulario.controls.email.hasError('email')) {
+        <small class="erro">Informe um e-mail válido.</small>
+        }
+        <label for="senha">Senha</label>
+        <input id="senha" type="password" required formControlName="senha">
+        @if (formulario.controls.senha.touched &&
+        formulario.controls.senha.hasError('required')) {
+        <small class="erro">Informe sua senha.</small>
+        }
+        <button type="submit">Entrar</button>
+    </form>
+    @if (mensagem()) {
+    <p role="status">{{ mensagem() }}</p>
+    }
+</section>

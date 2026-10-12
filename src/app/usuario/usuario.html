@@ -1,0 +1,27 @@
+<form class="card" [formGroup]="form" (ngSubmit)="cadastrar()">
+  <h1>Cadastro</h1>
+
+  <label>Nome</label>
+  <input formControlName="nome" />
+  @if (form.controls.nome.touched && form.controls.nome.invalid) {
+    <small>O nome é obrigatório (3 a 50 caracteres).</small>
+  }
+
+  <label>E-mail</label>
+  <input type="email" formControlName="email" />
+  @if (form.controls.email.touched && form.controls.email.invalid) {
+    <small>Informe um e-mail válido.</small>
+  }
+
+  <label>Senha</label>
+  <input type="password" formControlName="senha" />
+  @if (form.controls.senha.touched && form.controls.senha.invalid) {
+    <small>A senha é obrigatória (mínimo de 8 caracteres).</small>
+  }
+
+  <button type="submit" [disabled]="form.invalid">Cadastrar</button>
+
+  @if (mensagem()) {
+    <p [class]="erro() ? 'msg erro' : 'msg sucesso'">{{ mensagem() }}</p>
+  }
+</form>

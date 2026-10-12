@@ -1,0 +1,71 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 2rem 1rem;
+  background: #faf7f5;
+  color: #3d3a4a;
+  font-family: system-ui, sans-serif;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e9e4e1;
+  border-radius: 12px;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #e9e4e1;
+  border-radius: 8px;
+}
+
+small {
+  padding: 0.1rem 0.5rem;
+  background: #f4a9a0;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+button {
+  margin-top: 0.8rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background: #a8d0f0;
+  color: #3d3a4a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #8fbfe6;
+}
+
+button:disabled {
+  background: #e9e4e1;
+  color: #8e8a9b;
+  cursor: not-allowed;
+}
+
+.msg {
+  margin: 0.8rem 0 0;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.sucesso {
+  background: #c5d9e8;
+}
+
+.erro {
+  background: #f4a9a0;
+}
