@@ -1,0 +1,150 @@
+
+<section class="tarefas-container">
+  <header class="cabecalho">
+    <div>
+      <p class="sobretitulo">ORGANIZAÇÃO PESSOAL</p>
+      <h1>Minhas tarefas</h1>
+      <p class="subtitulo">Organize suas atividades e acompanhe seu progresso.</p>
+    </div>
+  </header>
+
+  @if (mensagem()) {
+    <div
+      class="mensagem"
+      [class.sucesso]="tipoMensagem() === 'sucesso'"
+      [class.erro]="tipoMensagem() === 'erro'"
+      role="status"
+      aria-live="polite"
+    >
+      {{ mensagem() }}
+    </div>
+  }
+
+  @if (carregando()) {
+    <p class="estado-vazio">Carregando suas tarefas...</p>
+  } @else if (tarefas().length === 0) {
+    <section class="estado-vazio">
+      <span class="icone-vazio" aria-hidden="true">✓</span>
+      <h2>Nenhuma tarefa por aqui</h2>
+      <p>Você ainda não tem tarefas cadastradas.</p>
+    </section>
+  } @else {
+    <section class="resumo">
+      <div class="resumo-item">
+        <span class="resumo-numero">{{ tarefasPendentes().length }}</span>
+        <span class="resumo-label">Pendentes</span>
+      </div>
+
+      <div class="resumo-item">
+        <span class="resumo-numero">{{ tarefasConcluidas().length }}</span>
+        <span class="resumo-label">Concluídas</span>
+      </div>
+    </section>
+
+    <section class="grupo-tarefas">
+      <div class="titulo-grupo">
+        <h2>Em andamento</h2>
+        <span class="contador pendente">{{ tarefasPendentes().length }}</span>
+      </div>
+
+      @if (tarefasPendentes().length === 0) {
+        <p class="grupo-vazio">Nenhuma tarefa pendente. Tudo em dia!</p>
+      } @else {
+        <div class="lista">
+          @for (tarefa of tarefasPendentes(); track tarefa.id) {
+            <article class="tarefa-card">
+              <div class="indicador pendente"></div>
+
+              <div class="tarefa-conteudo">
+                <h3>{{ tarefa.titulo }}</h3>
+                <p class="descricao">{{ tarefa.descricao }}</p>
+
+                <div class="metadados">
+                  <span class="status pendente">Pendente</span>
+                  <span class="vencimento">
+                    Vence em {{ tarefa.dataDeVencimento | date:'dd/MM/yyyy' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="acoes">
+                <button
+                  type="button"
+                  class="botao botao-concluir"
+                  (click)="concluirTarefa(tarefa)"
+                >
+                  Concluir
+                </button>
+
+                <button
+                  type="button"
+                  class="botao botao-editar"
+                  (click)="editarTarefa(tarefa)"
+                >
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  class="botao botao-excluir"
+                  (click)="excluirTarefa(tarefa)"
+                >
+                  Excluir
+                </button>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </section>
+
+    <section class="grupo-tarefas grupo-concluidas">
+      <div class="titulo-grupo">
+        <h2>Concluídas</h2>
+        <span class="contador concluida">{{ tarefasConcluidas().length }}</span>
+      </div>
+
+      @if (tarefasConcluidas().length === 0) {
+        <p class="grupo-vazio">As tarefas concluídas aparecerão aqui.</p>
+      } @else {
+        <div class="lista">
+          @for (tarefa of tarefasConcluidas(); track tarefa.id) {
+            <article class="tarefa-card tarefa-finalizada">
+              <div class="indicador concluida"></div>
+
+              <div class="tarefa-conteudo">
+                <h3>{{ tarefa.titulo }}</h3>
+                <p class="descricao">{{ tarefa.descricao }}</p>
+
+                <div class="metadados">
+                  <span class="status concluida">Concluída</span>
+                  <span class="vencimento">
+                    Vencimento: {{ tarefa.dataDeVencimento | date:'dd/MM/yyyy' }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="acoes">
+                <button
+                  type="button"
+                  class="botao botao-editar"
+                  (click)="editarTarefa(tarefa)"
+                >
+                  Editar
+                </button>
+
+                <button
+                  type="button"
+                  class="botao botao-excluir"
+                  (click)="excluirTarefa(tarefa)"
+                >
+                  Excluir
+                </button>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </section>
+  }
+</section>

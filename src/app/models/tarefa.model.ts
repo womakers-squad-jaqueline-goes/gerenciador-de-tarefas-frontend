@@ -1,6 +1,6 @@
 export enum StatusTarefa {
-  Pendente,
-  Concluida
+  Pendente = 'Pendente',
+  Concluida = 'Concluida'
 }
 
 export interface TarefaModel {
